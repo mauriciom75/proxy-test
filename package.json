@@ -1,0 +1,10 @@
+{
+    "name": "proxy-test",
+    "version": "0.0.1",
+    "description": "proxy test",
+    "license": "Apache-2.0",
+    "dependencies": {
+        "http-proxy": "1.18.1"
+    },
+    "bin": "server.js"
+}
