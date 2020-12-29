@@ -46,4 +46,4 @@ const exampleProxy = createProxyMiddleware(options);
 // mount `exampleProxy` in web server
 const app = express();
 app.use('/', exampleProxy);
-app.listen(3000);
+app.listen(8080);
