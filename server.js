@@ -1,11 +1,10 @@
-
 // include dependencies
 const express = require('express');
 const { createProxyMiddleware } = require('http-proxy-middleware');
  
 // proxy middleware options
 const options = {
-  target: 'http://www.example.org', // target host
+  target: 'http://nada', // target host
   changeOrigin: true, // needed for virtual hosted sites
   ws: true, // proxy websockets
   pathRewrite: {
@@ -22,20 +21,25 @@ const options = {
     console.log("req.url:"+req.url);
     console.log("headers:");
     console.log(req.headers);
+    console.log("envio a req.headers.host");
     console.log("-------------------------------");
-    return req.url;
+    return "http://"+req.headers.host;
   },
   
   onProxyReq: function(proxyReq, req, res) {
     console.log("onProxyReq");
     // add custom header to request
     proxyReq.setHeader('x-added-proxyReq', 'foobar');
+    console.log("headers:");
+    console.log(req.headers);
     // or log the req
   },
   onProxyRes: function(proxyRes, req, res) {
   	console.log("onProxyRes");
     proxyRes.headers['x-added-proxyRes'] = 'foobar'; // add new header to response
     delete proxyRes.headers['x-removed']; // remove header from response
+    console.log("headers:");
+    console.log(proxyRes.headers);
   },
   
 };
